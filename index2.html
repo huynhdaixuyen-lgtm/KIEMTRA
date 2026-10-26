@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đề Kiểm Tra Định Kỳ - Toán 9 - Bài 9</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- MathJax CDN for LaTeX Rendering -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .latex-content {
+            font-size: 1.05rem;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen text-slate-800 flex flex-col font-sans">
+
+    <!-- Header / Exam Title -->
+    <header class="bg-indigo-700 text-white py-6 shadow-md border-b-4 border-indigo-900">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <span class="bg-indigo-800 text-indigo-200 text-xs uppercase px-3 py-1 rounded-full font-bold tracking-wider">ĐỀ KIỂM TRA ĐỊNH KỲ</span>
+            <h1 class="text-2xl sm:text-3xl font-extrabold mt-2">MÔN TOÁN 9 - BÀI 9: CĂN THỨC BẬC HAI</h1>
+            <p class="text-indigo-100 text-sm mt-1">Biến đổi đơn giản và rút gọn biểu thức chứa căn thức bậc hai</p>
+            <div class="mt-4 flex flex-wrap justify-center gap-4 text-sm font-medium">
+                <span class="bg-indigo-900/60 px-3 py-1 rounded-lg">⏱️ Thời gian: 45 phút</span>
+                <span class="bg-indigo-900/60 px-3 py-1 rounded-lg">🎯 Mức độ: Nhận biết - Thông hiểu</span>
+                <span class="bg-indigo-900/60 px-3 py-1 rounded-lg">📋 Cấu trúc: 3 Dạng (19 Câu)</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
+
+        <!-- Student Info Header -->
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+            <h3 class="text-lg font-bold text-slate-700 border-b pb-2 mb-4">THÔNG TIN THÍ SINH</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Họ và tên học sinh:</label>
+                    <input type="text" id="studentName" placeholder="Nguyễn Văn A" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Lớp:</label>
+                    <input type="text" id="studentClass" placeholder="9A1" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Số báo danh / Mã HS:</label>
+                    <input type="text" id="studentId" placeholder="123456" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                </div>
+            </div>
+        </div>
+
+        <form id="quizForm">
+
+            <!-- PHẦN I: TRẮC NGHIỆM NHIỀU LỰA CHỌN -->
+            <section class="mb-10">
+                <div class="bg-indigo-900 text-white px-5 py-3 rounded-t-xl flex justify-between items-center">
+                    <h2 class="text-base font-bold uppercase">PHẦN I: Trắc nghiệm nhiều lựa chọn (10 câu - 3.0 điểm)</h2>
+                    <span class="text-xs bg-indigo-800 px-2 py-1 rounded">0.3đ / câu</span>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-b-xl border border-slate-200 border-t-0 space-y-6" id="part1Container">
+                    <!-- Dynamic Part 1 Questions -->
+                </div>
+            </section>
+
+            <!-- PHẦN II: TRẮC NGHIỆM ĐÚNG / SAI -->
+            <section class="mb-10">
+                <div class="bg-indigo-900 text-white px-5 py-3 rounded-t-xl flex justify-between items-center">
+                    <h2 class="text-base font-bold uppercase">PHẦN II: Trắc nghiệm Đúng / Sai (4 câu - 4.0 điểm)</h2>
+                    <span class="text-xs bg-indigo-800 px-2 py-1 rounded">1.0đ / câu (4 ý)</span>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-b-xl border border-slate-200 border-t-0 space-y-6" id="part2Container">
+                    <!-- Dynamic Part 2 Questions -->
+                </div>
+            </section>
+
+            <!-- PHẦN III: TRẢ LỜI NGẮN -->
+            <section class="mb-10">
+                <div class="bg-indigo-900 text-white px-5 py-3 rounded-t-xl flex justify-between items-center">
+                    <h2 class="text-base font-bold uppercase">PHẦN III: Trả lời ngắn (5 câu - 3.0 điểm)</h2>
+                    <span class="text-xs bg-indigo-800 px-2 py-1 rounded">0.6đ / câu</span>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-b-xl border border-slate-200 border-t-0 space-y-6" id="part3Container">
+                    <!-- Dynamic Part 3 Questions -->
+                </div>
+            </section>
+
+            <!-- Action Buttons -->
+            <div class="flex justify-center gap-4 py-6">
+                <button type="button" onclick="submitQuiz()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-10 rounded-xl shadow-lg transition duration-200">
+                    Nộp Bài Kiểm Tra
+                </button>
+                <button type="button" onclick="resetForm()" class="bg-slate-500 hover:bg-slate-600 text-white font-semibold py-3 px-6 rounded-xl shadow transition duration-200">
+                    Làm Lại Từ Đầu
+                </button>
+            </div>
+        </form>
+
+        <!-- Result Section (Hidden by Default) -->
+        <div id="resultModal" class="hidden bg-white p-8 rounded-2xl shadow-xl border border-indigo-200 mb-12">
+            <h2 class="text-2xl font-bold text-center text-slate-800 mb-2">BÁO CÁO KẾT QUẢ KIỂM TRA</h2>
+            <p class="text-center text-slate-500 text-sm mb-6" id="studentSummary"></p>
+            
+            <div class="flex justify-center items-center gap-6 mb-6">
+                <div class="text-center p-4 bg-indigo-50 rounded-xl border border-indigo-100 min-w-[140px]">
+                    <span class="block text-4xl font-black text-indigo-600" id="scoreDisplay">0.0</span>
+                    <span class="text-xs font-bold text-indigo-800 uppercase tracking-wider">Thang Điểm 10</span>
+                </div>
+                <div class="text-center p-4 bg-emerald-50 rounded-xl border border-emerald-100 min-w-[140px]">
+                    <span class="block text-4xl font-black text-emerald-600" id="correctCountDisplay">0 / 19</span>
+                    <span class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Số Câu Đạt</span>
+                </div>
+            </div>
+            
+            <div id="feedbackNotice" class="p-4 rounded-lg text-sm mb-6 text-center font-medium"></div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-slate-400 py-6 text-center text-sm">
+        <p>© Đề Kiểm Tra Chính Thức Toán 9 - Bài 9 (SGK Mới)</p>
+    </footer>
+
+    <!-- JavaScript Data and Controller -->
+    <script>
+        const part1Data = [
+            {
+                id: "p1_1",
+                question: "Với $x \\ge 0$ và $y \\ge 0$, khẳng định nào sau đây đúng?",
+                options: [
+                    "$\\sqrt{x \\cdot y^2} = y\\sqrt{x}$",
+                    "$\\sqrt{x \\cdot y^2} = x\\sqrt{y}$",
+                    "$\\sqrt{x \\cdot y^2} = -y\\sqrt{x}$",
+                    "$\\sqrt{x \\cdot y^2} = y^2\\sqrt{x}$"
+                ],
+                correct: 0,
+                explanation: "Vì $y \\ge 0$ nên $\\sqrt{x \\cdot y^2} = |y|\\sqrt{x} = y\\sqrt{x}$."
+            },
+            {
+                id: "p1_2",
+                question: "Đưa thừa số ra ngoài dấu căn của biểu thức $\\sqrt{32}$ ta thu được kết quả là:",
+                options: [
+                    "$2\\sqrt{4}$",
+                    "$4\\sqrt{2}$",
+                    "$16\\sqrt{2}$",
+                    "$8\\sqrt{2}$"
+                ],
+                correct: 1,
+                explanation: "$\\sqrt{32} = \\sqrt{16 \\cdot 2} = \\sqrt{4^2 \\cdot 2} = 4\\sqrt{2}$."
+            },
+            {
+                id: "p1_3",
+                question: "Cho $b < 0$. Kết quả của việc đưa thừa số vào trong dấu căn đối với $b\\sqrt{5}$ là:",
+                options: [
+                    "$\\sqrt{5b^2}$",
+                    "$\\sqrt{-5b}$",
+                    "$-\\sqrt{5b^2}$",
+                    "$-\\sqrt{5b}$"
+                ],
+                correct: 2,
+                explanation: "Do $b < 0$ nên $b\\sqrt{5} = -\\sqrt{(-b)^2 \\cdot 5} = -\\sqrt{5b^2}$."
+            },
+            {
+                id: "p1_4",
+                question: "Khử mẫu của biểu thức lấy căn $\\sqrt{\\frac{5}{2}}$ ta được kết quả là:",
+                options: [
+                    "$\\frac{\\sqrt{10}}{2}$",
+                    "$\\frac{\\sqrt{5}}{2}$",
+                    "$\\frac{5}{2}$",
+                    "$\\sqrt{10}$"
+                ],
+                correct: 0,
+                explanation: "$\\sqrt{\\frac{5}{2}} = \\sqrt{\\frac{5 \\cdot 2}{2^2}} = \\frac{\\sqrt{10}}{2}$."
+            },
+            {
+                id: "p1_5",
+                question: "Biểu thức liên hợp của mẫu trong biểu thức $\\frac{3}{\\sqrt{6} + 2}$ là:",
+                options: [
+                    "$\\sqrt{6} + 2$",
+                    "$\\sqrt{6} - 2$",
+                    "$2 - \\sqrt{6}$",
+                    "$\\sqrt{6}$"
+                ],
+                correct: 1,
+                explanation: "Mẫu là $\\sqrt{6} + 2$ nên biểu thức liên hợp tương ứng là $\\sqrt{6} - 2$."
+            },
+            {
+                id: "p1_6",
+                question: "Trục căn thức ở mẫu của biểu thức $\\frac{10}{\\sqrt{5}}$ ta được kết quả là:",
+                options: [
+                    "$2$",
+                    "$5\\sqrt{2}$",
+                    "$2\\sqrt{5}$",
+                    "$\\sqrt{5}$"
+                ],
+                correct: 2,
+                explanation: "$\\frac{10}{\\sqrt{5}} = \\frac{10\\sqrt{5}}{5} = 2\\sqrt{5}$."
+            },
+            {
+                id: "p1_7",
+                question: "Kết quả của phép tính $\\sqrt{20} - \\sqrt{5}$ là:",
+                options: [
+                    "$\\sqrt{15}$",
+                    "$\\sqrt{5}$",
+                    "$15$",
+                    "$3\\sqrt{5}$"
+                ],
+                correct: 1,
+                explanation: "$\\sqrt{20} - \\sqrt{5} = 2\\sqrt{5} - \\sqrt{5} = \\sqrt{5}$."
+            },
+            {
+                id: "p1_8",
+                question: "Trục căn thức ở mẫu của biểu thức $\\frac{6}{\\sqrt{7} - 1}$ ta được kết quả là:",
+                options: [
+                    "$\\sqrt{7} + 1$",
+                    "$\\sqrt{7} - 1$",
+                    "$6(\\sqrt{7} + 1)$",
+                    "$\\frac{\\sqrt{7} + 1}{6}$"
+                ],
+                correct: 0,
+                explanation: "$\\frac{6}{\\sqrt{7} - 1} = \\frac{6(\\sqrt{7} + 1)}{7 - 1} = \\frac{6(\\sqrt{7} + 1)}{6} = \\sqrt{7} + 1$."
+            },
+            {
+                id: "p1_9",
+                question: "Đưa thừa số vào trong dấu căn của biểu thức $3\\sqrt{2}$ thu được:",
+                options: [
+                    "$\\sqrt{6}$",
+                    "$\\sqrt{12}$",
+                    "$\\sqrt{18}$",
+                    "$\\sqrt{36}$"
+                ],
+                correct: 2,
+                explanation: "$3\\sqrt{2} = \\sqrt{3^2 \\cdot 2} = \\sqrt{9 \\cdot 2} = \\sqrt{18}$."
+            },
+            {
+                id: "p1_10",
+                question: "Rút gọn biểu thức $Q = \\sqrt{12} - 3\\sqrt{3} + \\sqrt{48}$ ta được kết quả là:",
+                options: [
+                    "$3\\sqrt{3}$",
+                    "$2\\sqrt{3}$",
+                    "$5\\sqrt{3}$",
+                    "$\\sqrt{3}$"
+                ],
+                correct: 0,
+                explanation: "$Q = 2\\sqrt{3} - 3\\sqrt{3} + 4\\sqrt{3} = (2 - 3 + 4)\\sqrt{3} = 3\\sqrt{3}$."
+            }
+        ];
+
+        const part2Data = [
+            {
+                id: "p2_1",
+                title: "Cho ba biểu thức chứa căn: $X = \\sqrt{50}$, $Y = -2\\sqrt{3}$, $Z = \\sqrt{\\frac{7}{16}}$.",
+                items: [
+                    { key: "a", text: "Biến đổi $X$ bằng cách đưa thừa số ra ngoài dấu căn ta được $X = 5\\sqrt{2}$.", correct: true, exp: "Đúng, $\\sqrt{50} = \\sqrt{25 \\cdot 2} = 5\\sqrt{2}$." },
+                    { key: "b", text: "Đưa thừa số vào trong dấu căn biểu thức $Y$ ta thu được $Y = \\sqrt{-12}$.", correct: false, exp: "Sai, $-2 < 0$ nên $Y = -\\sqrt{(-2)^2 \\cdot 3} = -\\sqrt{12}$." },
+                    { key: "c", text: "Khử mẫu của biểu thức $Z$ ta thu được $Z = \\frac{\\sqrt{7}}{4}$.", correct: true, exp: "Đúng, $\\sqrt{\\frac{7}{16}} = \\frac{\\sqrt{7}}{\\sqrt{16}} = \\frac{\\sqrt{7}}{4}$." },
+                    { key: "d", text: "So sánh $X$ và $4\\sqrt{3}$, ta có $X < 4\\sqrt{3}$.", correct: false, exp: "Sai, $X = \\sqrt{50}$ còn $4\\sqrt{3} = \\sqrt{48}$. Vì $50 > 48$ nên $X > 4\\sqrt{3}$." }
+                ]
+            },
+            {
+                id: "p2_2",
+                title: "Xét biểu thức $N = \\frac{5}{\\sqrt{11} - 1}$.",
+                items: [
+                    { key: "a", text: "Biểu thức liên hợp của mẫu số $\\sqrt{11} - 1$ là $\\sqrt{11} + 1$.", correct: true, exp: "Đúng." },
+                    { key: "b", text: "Sau khi trục căn thức ở mẫu, mẫu số mới nhận giá trị bằng $10$.", correct: true, exp: "Đúng, $(\\sqrt{11})^2 - 1^2 = 11 - 1 = 10$." },
+                    { key: "c", text: "Biểu thức $N$ sau khi rút gọn thu được kết quả là $\\frac{\\sqrt{11} + 1}{2}$.", correct: true, exp: "Đúng, $N = \\frac{5(\\sqrt{11}+1)}{10} = \\frac{\\sqrt{11}+1}{2}$." },
+                    { key: "d", text: "Giá trị của $N$ nhỏ hơn $2$.", correct: false, exp: "Sai, $3 < \\sqrt{11} < 4 \\Rightarrow 4 < \\sqrt{11}+1 < 5 \\Rightarrow 2 < N < 2.5$." }
+                ]
+            },
+            {
+                id: "p2_3",
+                title: "Cho các đẳng thức biến đổi căn thức với $a > 0$:",
+                items: [
+                    { key: "a", text: "$\\sqrt{9a} = 3\\sqrt{a}$.", correct: true, exp: "Đúng, $\\sqrt{9a} = \\sqrt{3^2 a} = 3\\sqrt{a}$." },
+                    { key: "b", text: "$\\frac{2a}{\\sqrt{a}} = 2\\sqrt{a}$.", correct: true, exp: "Đúng, $\\frac{2a\\sqrt{a}}{a} = 2\\sqrt{a}$." },
+                    { key: "c", text: "$a\\sqrt{\\frac{4}{a}} = 2$.", correct: false, exp: "Sai, $a\\sqrt{\\frac{4}{a}} = \\sqrt{\\frac{4a^2}{a}} = \\sqrt{4a} = 2\\sqrt{a}$." },
+                    { key: "d", text: "$\\frac{1}{\\sqrt{a} - 2} = \\frac{\\sqrt{a} + 2}{a - 4}$ (với $a \\ne 4$).", correct: true, exp: "Đúng." }
+                ]
+            },
+            {
+                id: "p2_4",
+                title: "Cho biểu thức $H = \\sqrt{18} + \\sqrt{50} - \\sqrt{98}$.",
+                items: [
+                    { key: "a", text: "Biến đổi các căn thức: $\\sqrt{18} = 3\\sqrt{2}$, $\\sqrt{50} = 5\\sqrt{2}$, $\\sqrt{98} = 7\\sqrt{2}$.", correct: true, exp: "Đúng." },
+                    { key: "b", text: "Các căn thức sau khi rút gọn đều đồng dạng với $\\sqrt{2}$.", correct: true, exp: "Đúng." },
+                    { key: "c", text: "Rút gọn biểu thức $H$ thu được $H = \\sqrt{2}$.", correct: true, exp: "Đúng, $H = (3 + 5 - 7)\\sqrt{2} = 1\\sqrt{2} = \\sqrt{2}$." },
+                    { key: "d", text: "Giá trị của $H^2$ bằng $4$.", correct: false, exp: "Sai, $H = \\sqrt{2} \\Rightarrow H^2 = 2$." }
+                ]
+            }
+        ];
+
+        const part3Data = [
+            {
+                id: "p3_1",
+                question: "Đưa thừa số vào trong dấu căn của biểu thức $5\\sqrt{2}$ thu được $\\sqrt{y}$. Tìm giá trị của $y$.",
+                correctAnswers: ["50"],
+                explanation: "$5\\sqrt{2} = \\sqrt{5^2 \\cdot 2} = \\sqrt{25 \\cdot 2} = \\sqrt{50} \\Rightarrow y = 50$."
+            },
+            {
+                id: "p3_2",
+                question: "Tính giá trị thu gọn của biểu thức $M = 2\\sqrt{12} - \\sqrt{27} + \\sqrt{3}$ dưới dạng $k\\sqrt{3}$. Cho biết giá trị của $k$ bằng bao nhiêu?",
+                correctAnswers: ["2"],
+                explanation: "$M = 2(2\\sqrt{3}) - 3\\sqrt{3} + \\sqrt{3} = 4\\sqrt{3} - 3\\sqrt{3} + \\sqrt{3} = 2\\sqrt{3} \\Rightarrow k = 2$."
+            },
+            {
+                id: "p3_3",
+                question: "Tìm giá trị nguyên của $x$ để mẫu số của biểu thức $\\frac{4}{\\sqrt{x} - 2}$ sau khi trục căn thức nhận giá trị bằng 5.",
+                correctAnswers: ["9"],
+                explanation: "Mẫu số sau khi trục căn thức là $x - 4$. Theo đề bài $x - 4 = 5 \\Rightarrow x = 9$."
+            },
+            {
+                id: "p3_4",
+                question: "Tính giá trị số của biểu thức $C = (\\sqrt{7} + 3)(\\sqrt{7} - 3) + \\sqrt{\\frac{32}{2}}$.",
+                correctAnswers: ["2"],
+                explanation: "$C = [(\\sqrt{7})^2 - 3^2] + \\sqrt{16} = (7 - 9) + 4 = -2 + 4 = 2$."
+            },
+            {
+                id: "p3_5",
+                question: "Cho biểu thức $A = \\frac{x - 9}{\\sqrt{x} - 3}$ với $x \\ge 0, x \\ne 9$. Tính giá trị của $A$ khi $x = 16$.",
+                correctAnswers: ["7"],
+                explanation: "$A = \\frac{(\\sqrt{x}-3)(\\sqrt{x}+3)}{\\sqrt{x}-3} = \\sqrt{x} + 3$. Thay $x = 16 \\Rightarrow A = \\sqrt{16} + 3 = 4 + 3 = 7$."
+            }
+        ];
+
+        // Render UI Function
+        function renderQuiz() {
+            // Render Part 1
+            const p1Container = document.getElementById("part1Container");
+            p1Container.innerHTML = part1Data.map((q, idx) => `
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                    <p class="font-semibold text-slate-800 mb-3 latex-content"><span class="text-indigo-600 font-bold">Câu ${idx + 1}:</span> ${q.question}</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        ${q.options.map((opt, oIdx) => `
+                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-slate-50 transition border-slate-200">
+                                <input type="radio" name="${q.id}" value="${oIdx}" class="text-indigo-600 focus:ring-indigo-500 h-4 w-4">
+                                <span class="ml-3 text-sm text-slate-700 latex-content"><strong class="mr-1">${String.fromCharCode(65 + oIdx)}.</strong> ${opt}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div id="exp_${q.id}" class="hidden mt-4 p-3 bg-indigo-50 border border-indigo-100 rounded-lg text-sm text-indigo-900 latex-content"></div>
+                </div>
+            `).join('');
+
+            // Render Part 2
+            const p2Container = document.getElementById("part2Container");
+            p2Container.innerHTML = part2Data.map((q, idx) => `
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                    <p class="font-semibold text-slate-800 mb-3 latex-content"><span class="text-indigo-600 font-bold">Câu ${idx + 1}:</span> ${q.title}</p>
+                    <div class="space-y-2">
+                        ${q.items.map((item) => `
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3 border rounded-lg border-slate-100 bg-slate-50/50 gap-2">
+                                <span class="text-sm text-slate-700 latex-content flex-grow"><strong class="text-indigo-600 mr-1">${item.key})</strong> ${item.text}</span>
+                                <div class="flex items-center gap-4 text-sm font-semibold self-end sm:self-center">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="${q.id}_${item.key}" value="true" class="text-emerald-600 focus:ring-emerald-500 h-4 w-4">
+                                        <span class="ml-1 text-emerald-700">Đúng</span>
+                                    </label>
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="${q.id}_${item.key}" value="false" class="text-rose-600 focus:ring-rose-500 h-4 w-4">
+                                        <span class="ml-1 text-rose-700">Sai</span>
+                                    </label>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div id="exp_${q.id}" class="hidden mt-4 p-3 bg-indigo-50 border border-indigo-100 rounded-lg text-sm text-indigo-900 latex-content"></div>
+                </div>
+            `).join('');
+
+            // Render Part 3
+            const p3Container = document.getElementById("part3Container");
+            p3Container.innerHTML = part3Data.map((q, idx) => `
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                    <p class="font-semibold text-slate-800 mb-3 latex-content"><span class="text-indigo-600 font-bold">Câu ${idx + 1}:</span> ${q.question}</p>
+                    <div class="flex items-center gap-3">
+                        <label class="text-xs font-bold text-slate-500 uppercase">Đáp số:</label>
+                        <input type="text" id="${q.id}" placeholder="Nhập kết quả..." class="px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm max-w-xs">
+                    </div>
+                    <div id="exp_${q.id}" class="hidden mt-4 p-3 bg-indigo-50 border border-indigo-100 rounded-lg text-sm text-indigo-900 latex-content"></div>
+                </div>
+            `).join('');
+
+            // Re-render MathJax
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        }
+
+        // Submit and Grade Quiz
+        function submitQuiz() {
+            const name = document.getElementById("studentName").value.trim();
+            const sClass = document.getElementById("studentClass").value.trim();
+
+            let p1Correct = 0;
+            let p2Correct = 0;
+            let p3Correct = 0;
+
+            // Grade Part 1 (10 questions * 0.3 = 3.0 pts)
+            part1Data.forEach(q => {
+                const selected = document.querySelector(`input[name="${q.id}"]:checked`);
+                const expDiv = document.getElementById(`exp_${q.id}`);
+                expDiv.classList.remove('hidden');
+
+                if (selected && parseInt(selected.value) === q.correct) {
+                    p1Correct++;
+                    expDiv.innerHTML = `<span class="font-bold text-emerald-600">✓ Chính xác!</span> ${q.explanation}`;
+                } else {
+                    expDiv.innerHTML = `<span class="font-bold text-rose-600">✗ Sai!</span> Đáp án đúng là <strong>${String.fromCharCode(65 + q.correct)}</strong>. ${q.explanation}`;
+                }
+            });
+
+            // Grade Part 2 (4 questions * 1.0 = 4.0 pts - all 4 items correct required for full point per câu)
+            part2Data.forEach(q => {
+                let allCorrect = true;
+                let expText = "<strong>Chi tiết giải thích các ý:</strong><br>";
+
+                q.items.forEach(item => {
+                    const selected = document.querySelector(`input[name="${q.id}_${item.key}"]:checked`);
+                    const val = selected ? (selected.value === 'true') : null;
+                    if (val !== item.correct) {
+                        allCorrect = false;
+                    }
+                    expText += `- Ý ${item.key}: <i>${item.correct ? 'Đúng' : 'Sai'}</i> - ${item.exp}<br>`;
+                });
+
+                const expDiv = document.getElementById(`exp_${q.id}`);
+                expDiv.classList.remove('hidden');
+                if (allCorrect) {
+                    p2Correct++;
+                    expDiv.innerHTML = `<span class="font-bold text-emerald-600">✓ Đúng toàn bộ 4 ý! (+1.0 điểm)</span><br>${expText}`;
+                } else {
+                    expDiv.innerHTML = `<span class="font-bold text-rose-600">✗ Chưa đạt tối đa câu này.</span><br>${expText}`;
+                }
+            });
+
+            // Grade Part 3 (5 questions * 0.6 = 3.0 pts)
+            part3Data.forEach(q => {
+                const inputVal = document.getElementById(q.id).value.trim();
+                const expDiv = document.getElementById(`exp_${q.id}`);
+                expDiv.classList.remove('hidden');
+
+                if (q.correctAnswers.includes(inputVal)) {
+                    p3Correct++;
+                    expDiv.innerHTML = `<span class="font-bold text-emerald-600">✓ Chính xác!</span> ${q.explanation}`;
+                } else {
+                    expDiv.innerHTML = `<span class="font-bold text-rose-600">✗ Chưa đúng!</span> Đáp án chuẩn: <strong>${q.correctAnswers.join(' hoặc ')}</strong>. ${q.explanation}`;
+                }
+            });
+
+            // Score Calculation
+            const scorePart1 = p1Correct * 0.3;
+            const scorePart2 = p2Correct * 1.0;
+            const scorePart3 = p3Correct * 0.6;
+            const totalScore = (scorePart1 + scorePart2 + scorePart3).toFixed(1);
+            const totalCorrect = p1Correct + p2Correct + p3Correct;
+
+            // UI Display
+            document.getElementById("scoreDisplay").innerText = totalScore;
+            document.getElementById("correctCountDisplay").innerText = `${totalCorrect} / 19`;
+            
+            const summaryText = name || sClass ? `Học sinh: <strong>${name || 'Chưa nhập'}</strong> | Lớp: <strong>${sClass || 'Chưa nhập'}</strong>` : "Bài làm chưa ghi danh tính học sinh.";
+            document.getElementById("studentSummary").innerHTML = summaryText;
+
+            const feedbackNotice = document.getElementById("feedbackNotice");
+            if (totalScore >= 8.0) {
+                feedbackNotice.className = "p-4 rounded-lg text-sm mb-6 text-center font-medium bg-emerald-100 text-emerald-800 border border-emerald-200";
+                feedbackNotice.innerText = "🌟 Xuất sắc! Em nắm rất vững kiến thức biến đổi căn thức bậc hai.";
+            } else if (totalScore >= 5.0) {
+                feedbackNotice.className = "p-4 rounded-lg text-sm mb-6 text-center font-medium bg-amber-100 text-amber-800 border border-amber-200";
+                feedbackNotice.innerText = "👍 Đạt yêu cầu! Em nên rèn luyện thêm các bài tập trục căn thức và rút gọn.";
+            } else {
+                feedbackNotice.className = "p-4 rounded-lg text-sm mb-6 text-center font-medium bg-rose-100 text-rose-800 border border-rose-200";
+                feedbackNotice.innerText = "⚠️ Cần cố gắng hơn! Hãy xem lại phần hướng dẫn giải chi tiết bên dưới để bổ sung kiến thức.";
+            }
+
+            document.getElementById("resultModal").classList.remove('hidden');
+            document.getElementById("resultModal").scrollIntoView({ behavior: 'smooth' });
+
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        }
+
+        // Reset Quiz
+        function resetForm() {
+            document.getElementById("quizForm").reset();
+            document.getElementById("resultModal").classList.add('hidden');
+            
+            const exps = document.querySelectorAll('[id^="exp_"]');
+            exps.forEach(e => e.classList.add('hidden'));
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize on Load
+        window.onload = renderQuiz;
+    </script>
+</body>
+</html>
+```eof
+
+Tôi đã tạo xong **Bộ Đề Kiểm Tra Chính Thức** mới hoàn toàn cho Bài 9 (Toán 9). Đề được thiết kế chuẩn cấu trúc 3 dạng thức mới với đáp án, lời giải chi tiết và bảng quy đổi điểm tự động trực tiếp trên Canvas.
